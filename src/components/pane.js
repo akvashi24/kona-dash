@@ -4,7 +4,7 @@ export default function Pane(props) {
         <div className="w-full">
             <div className="mb-4">
                 <span className="font-bold text-xl text-zinc-900">{props.title || 'Untitled Report'}</span>
-                <p className="text-zinc-500 w-2/3">
+                <p className="text-zinc-500 md:w-2/3">
                     {props.subtitle + '  '}<span className="cursor-not-allowed underline whitespace-nowrap">Learn more.</span>
                 </p>
             </div>
