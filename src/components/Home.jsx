@@ -21,20 +21,20 @@ export default function Home() {
                         <div className="max-w-2xl mb-8 md:mb-0">
                             <Pane title='Unengaged Teams' subtitle='Teams that are not checking in with Kona regularly.'>
                                 <div className="mt-4 text-center">
-                                    {/* <TableReport fetch={getBurntoutReport} /> */}
+                                    <TableReport fetch={getUnderengagedReport} labels={['Manager', 'Check-in Rate']} />
                                 </div>
                             </Pane>
                         </div>
                         <div className="max-w-2xl">
                             <Pane title='Burnt Out Teams' subtitle='Teams that are consistently reporting in the red.'>
                                 <div className="mt-4 text-center">
-                                    {/* <TableReport fetch={getUnderengagedReport} /> */}
+                                    <TableReport fetch={getBurntoutReport} labels={['Manager', 'Burnout Rate']} />
                                 </div>
                             </Pane>
                         </div>
                     </div>
                     <div className="w-full mb-8">
-                        <Pane title='Overall Health' subtitle="Breakdown of all employees' mental health">
+                        <Pane title='Overall Health' subtitle="Breakdown of all employees' mental health.  ">
                             <div className="py-4 text-center w-48 mx-auto">
                                 <PieReport fetch={getRYGBreakdownReport} />
                             </div>

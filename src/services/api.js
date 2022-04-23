@@ -28,7 +28,7 @@ export const getBurntoutReport = async () => {
 };
 
 export const getUnderengagedReport = async () => {
-    const query = "api/v1/reports/burntout"
+    const query = "api/v1/reports/underengaged"
     const results = await api.get(query).catch(error => {
         // TODO: (akv) this doesn't work if the endpoint doesn't exist
         logErrors(error);
@@ -38,7 +38,7 @@ export const getUnderengagedReport = async () => {
 };
 
 export const getRYGBreakdownReport = async () => {
-    const query = "api/v1/reports/burntout"
+    const query = "api/v1/reports/rygbreakdown"
     const results = await api.get(query).catch(error => {
         // TODO: (akv) this doesn't work if the endpoint doesn't exist
         logErrors(error);

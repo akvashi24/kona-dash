@@ -25,10 +25,10 @@ names = {
  'U02SGN4NB9S': 'Test Testerino',
  'U02UB0BTJES': 'Lassie Collie',
  'U030JSMDTND': 'Sparky Pug',
- 'U033XN5SL8J': 'Lester Testington',
- 'UQ3QMNZ4M': 'Fester Testington',
- 'UQ5L65QKZ': 'Jester Testington',
- 'UQ6157D2S': 'Blester Testington',
+ 'U033XN5SL8J': 'Alan Turing',
+ 'UQ3QMNZ4M': 'Ada Lovelace',
+ 'UQ5L65QKZ': 'Edsger Dijkstra',
+ 'UQ6157D2S': 'Guido Van Rossum',
  }
 
 teams = {'U01URC62FJL&0',
@@ -143,23 +143,36 @@ def get_average_metric(daily_by_team):
 def get_ratio(average_by_team):
     ratio_per_team = {}
     for team, average in average_by_team.items():
-        ratio_per_team[team] = average / team_sizes[team]
+        ratio_per_team[team] = round(average / team_sizes[team] * 100, 1)
     return ratio_per_team
 
-def serialize_table(ratios):
-    sorted_ratios = sorted(ratios, key=lambda x: x[1])
+def serialize_table(ratios, reverse=False):
+    sorted_ratios = sorted(ratios, key=lambda x: x[1], reverse=reverse)
     result = [{"name": names[team_id[:-2]], "rate": rate} for (team_id, rate) in sorted_ratios]
     return result
 
 def get_underengaged():
+    """
+    Sort teams according to engagement.  Engagement is defined as the percentage of a team
+    that completes a check-in on a given day.  The final list is an average of engagement across
+    the whole time series.
+    """
     ratios = get_ratio(get_average_metric(get_daily_engagement())).items()
-    return serialize_table(ratios)
+    return serialize_table(ratios, False)
 
 def get_burntout():
+    """
+    Sort teams according to burntout.  Burn out is defined as the percentage of a team
+    that reports a red on a given day.  The final list is an average of burn out across
+    the whole time series.
+    """
     ratios = get_ratio(get_average_metric(get_daily_reds())).items()
-    return serialize_table(ratios)
+    return serialize_table(ratios, True)
 
 def get_ryg_breakdown():
+    """
+    Breakdown of all checkins by selection; does not ignore members that check-in to multiple teams.
+    """
     data = get_raw_data()
     ryg = {'red': 0, 'yellow': 0, 'green': 0}
     for row in data:
