@@ -158,3 +158,11 @@ def get_underengaged():
 def get_burntout():
     ratios = get_ratio(get_average_metric(get_daily_reds())).items()
     return serialize_table(ratios)
+
+def get_ryg_breakdown():
+    data = get_raw_data()
+    ryg = {'red': 0, 'yellow': 0, 'green': 0}
+    for row in data:
+        selection = row['Selection']
+        ryg[selection] += 1
+    return ryg

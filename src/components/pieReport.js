@@ -1,26 +1,36 @@
 import { PieChart } from 'react-minimal-pie-chart';
+import React, { useState, useEffect } from 'react';
 
 export default function TableReport(props) {
-    const data = [
-        { title: 'Green', value: 17, color: '#2FA23F' },
-        { title: 'Yellow', value: 15, color: '#FACD4C' },
-        { title: 'Red', value: 2, color: '#BF1A31' },
-    ]
+    const [loading, setLoading] = useState(true)
+    const [data, setData] = useState({})
+    useEffect(() => {
+        props.fetch().then(
+            (results) => {
+                setData(results)
+                setLoading(false)
+            }
+        )
+    })
     return (
         <div>
-            <PieChart
-                data={data}
-                lineWidth={20}
-                paddingAngle={18}
-                rounded
-                label={({ dataEntry }) => `${dataEntry.value}%`}
-                labelStyle={(index) => ({
-                    fill: data[index].color,
-                    fontSize: '8px',
-                    fontFamily: 'sans-serif',
-                })}
-                labelPosition={60}
-            />
+            {
+                loading ?
+                    <span className="mx-auto font-bold text-2xl mt-4">Loading...</span> :
+                    <PieChart
+                        data={data}
+                        lineWidth={20}
+                        paddingAngle={18}
+                        rounded
+                        label={({ dataEntry }) => `${dataEntry.value}%`}
+                        labelStyle={(index) => ({
+                            fill: data[index].color,
+                            fontSize: '8px',
+                            fontFamily: 'sans-serif',
+                        })}
+                        labelPosition={60}
+                    />
+            }
         </div>
     )
 }
