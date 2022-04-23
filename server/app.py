@@ -1,10 +1,12 @@
 from flask import Flask, Blueprint
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from script import get_burntout, get_underengaged, get_ryg_breakdown
 
 app = Flask(__name__)
 api_v1_bp = Blueprint("api/v1", f"{__name__}/v1", url_prefix="/api/v1")
 api = Api(api_v1_bp)
+CORS(app)
 
 
 class BurntOutReport(Resource):
