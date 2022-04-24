@@ -9,13 +9,11 @@ export default function TableReport(props) {
     useEffect(() => {
         props.fetch().then(
             (results) => {
-                const total = results.green + results.yellow + results.red
                 const formatted = [
                     { title: 'Green', value: results.green, color: '#2FA23F' },
                     { title: 'Yellow', value: results.yellow, color: '#FACD4C' },
                     { title: 'Red', value: results.red, color: '#BF1A31' },
                 ]
-                console.log(formatted)
                 setData(formatted)
                 setLoading(false)
             }

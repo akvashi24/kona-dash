@@ -2,7 +2,6 @@ import Pane from './pane'
 import TableReport from './tableReport'
 import PieReport from './pieReport'
 import React from 'react'
-// import testManagers from '../data/managers.json'
 import { getBurntoutReport, getUnderengagedReport, getRYGBreakdownReport } from '../services/api'
 
 

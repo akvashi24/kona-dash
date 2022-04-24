@@ -135,7 +135,6 @@ def get_daily_reds():
 def get_average_metric(daily_by_team):
     average_by_team = {}
     for team, value_per_day in daily_by_team.items():
-        # TODO (akv): this 
         total = [v for v in value_per_day.values()]
         average_by_team[team] = mean(total)
     return average_by_team
